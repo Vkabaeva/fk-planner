@@ -39,3 +39,15 @@ npm run build
 npm run lint
 npm run test:unit
 ```
+
+## Публикация на GitHub Pages
+
+Репозиторий публикует приложение через GitHub Actions при отправке изменений в ветку main.
+
+1. В Settings → Pages → Build and deployment выбери источник GitHub Actions.
+2. В Settings → Secrets and variables → Actions → Variables добавь:
+   - VITE_SUPABASE_URL — URL проекта Supabase;
+   - VITE_SUPABASE_PUBLISHABLE_KEY — publishable key.
+3. В настройках Supabase укажи https://vkabaeva.github.io/fk-planner/ как Site URL и добавь этот же адрес в разрешённые Redirect URLs.
+
+Publishable key предназначен для клиентского приложения. Никогда не добавляй в сборку service_role или другие секретные ключи. Если переменные Supabase не заданы, сайт откроется в локальном режиме без синхронизации между устройствами.

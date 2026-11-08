@@ -4,6 +4,8 @@ import { APP_CONFIG } from '../config/appConfig'
 
 type Props = { supabase: SupabaseClient }
 
+const getAppRedirectUrl = () => new URL(import.meta.env.BASE_URL, window.location.origin).toString()
+
 export default function AuthScreen({ supabase }: Props) {
   const [mode, setMode] = useState<'signin' | 'signup'>('signin')
   const [email, setEmail] = useState('')
@@ -22,7 +24,7 @@ export default function AuthScreen({ supabase }: Props) {
         const { error: authError } = await supabase.auth.signInWithPassword({ email: email.trim(), password })
         if (authError) throw authError
       } else {
-        const { data, error: authError } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: window.location.origin } })
+        const { data, error: authError } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: getAppRedirectUrl() } })
         if (authError) throw authError
         if (!data.session) setMessage('Проверь почту: отправили письмо для подтверждения регистрации.')
       }
@@ -36,7 +38,7 @@ export default function AuthScreen({ supabase }: Props) {
     setBusy(true)
     setMessage('')
     setError('')
-    const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: window.location.origin })
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: getAppRedirectUrl() })
     if (resetError) setError(resetError.message)
     else setMessage('Если для этого адреса есть аккаунт, письмо для сброса пароля уже отправлено.')
     setBusy(false)
