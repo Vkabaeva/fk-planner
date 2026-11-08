@@ -1,6 +1,48 @@
 import { useEffect, useState, type RefObject } from 'react'
 import type { Nomination, Project } from '../domain/types'
 
+function createTextMeasureProbe(source: HTMLElement) {
+  const sourceStyle = getComputedStyle(source)
+  const probe = source.cloneNode(false) as HTMLElement
+  probe.removeAttribute('class')
+  Object.assign(probe.style, {
+    position: 'fixed',
+    left: '-10000px',
+    top: '0',
+    display: 'inline-block',
+    width: 'max-content',
+    minWidth: '0',
+    maxWidth: 'none',
+    flex: 'none',
+    whiteSpace: 'nowrap',
+    visibility: 'hidden',
+    pointerEvents: 'none',
+    margin: '0',
+    font: sourceStyle.font,
+    letterSpacing: sourceStyle.letterSpacing,
+    wordSpacing: sourceStyle.wordSpacing,
+    textTransform: sourceStyle.textTransform,
+    paddingLeft: sourceStyle.paddingLeft,
+    paddingRight: sourceStyle.paddingRight,
+    borderLeftWidth: sourceStyle.borderLeftWidth,
+    borderRightWidth: sourceStyle.borderRightWidth,
+    borderLeftStyle: sourceStyle.borderLeftStyle,
+    borderRightStyle: sourceStyle.borderRightStyle,
+    boxSizing: sourceStyle.boxSizing,
+  })
+  document.body.append(probe)
+
+  return {
+    measure(text: string) {
+      probe.textContent = text
+      return probe.getBoundingClientRect().width
+    },
+    remove() {
+      probe.remove()
+    },
+  }
+}
+
 export function useNominationColumnWidth(
   boardRef: RefObject<HTMLElementTagNameMap['section'] | null>,
   nominations: Nomination[],
@@ -20,20 +62,20 @@ export function useNominationColumnWidth(
       const heading = board.querySelector<HTMLElement>('.lane-heading')
       const actions = board.querySelector<HTMLElement>('.lane-actions .icon-button')
       const name = board.querySelector<HTMLElement>('.lane-name')
-      const context = document.createElement('canvas').getContext('2d')
-      if (!title || !count || !dot || !heading || !name || !context) return
+      if (!title || !count || !dot || !heading || !name) return
 
-      context.font = getComputedStyle(title).font
-      const longestTitle = Math.max(...nominations.map((item) => context.measureText(item.name).width))
-      context.font = getComputedStyle(count).font
-      const widestCount = Math.max(...nominations.map((item) => context.measureText(String(projects.filter((project) => project.nominationId === item.id).length)).width))
-      const countStyle = getComputedStyle(count)
-      const countWidth = widestCount + (parseFloat(countStyle.paddingLeft) || 0) + (parseFloat(countStyle.paddingRight) || 0)
-      const dotWidth = parseFloat(getComputedStyle(dot).width) || 8
+      const titleProbe = createTextMeasureProbe(title)
+      const countProbe = createTextMeasureProbe(count)
+      const longestTitle = Math.max(...nominations.map((item) => titleProbe.measure(item.name)))
+      const widestCount = Math.max(...nominations.map((item) => countProbe.measure(String(projects.filter((project) => project.nominationId === item.id).length))))
+      titleProbe.remove()
+      countProbe.remove()
+
+      const dotWidth = dot.getBoundingClientRect().width || 8
       const nameGap = parseFloat(getComputedStyle(name).columnGap) || 8
       const headingGap = parseFloat(getComputedStyle(heading).columnGap) || 6
       const actionWidth = actions?.getBoundingClientRect().width || 24
-      const nextWidth = Math.ceil(dotWidth + nameGap * 2 + longestTitle + countWidth + headingGap + actionWidth)
+      const nextWidth = Math.ceil(dotWidth + nameGap * 2 + longestTitle + widestCount + headingGap + actionWidth + 2)
       setWidth((current) => current === nextWidth ? current : nextWidth)
     }
 
