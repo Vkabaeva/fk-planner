@@ -236,7 +236,7 @@ form label small { color: #9b95a3; font-size: 9px; font-weight: 400; }
 .gantt-days div.today-col { background: #f3f0f9; color: #6f5c96; border-left-color: #d2c5e7; }
 .gantt-row { min-height: 45px; border-top: 1px solid #f4f2f6; }
 .gantt-project { padding: 7px 8px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-.gantt-project-title { color: #4b455b; font: 600 16px/1.25 'IBM Plex Sans', sans-serif; text-align: left; border: 0; padding: 0; background: transparent; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }.gantt-project-title:hover { color: #5b21b6; text-decoration: underline; }.gantt-project small { color: #aaa4b1; font-size: 8px; margin-top: 3px; }
+.gantt-project-title { color: #4b455b; font: 600 14px/1.25 'IBM Plex Sans', sans-serif; text-align: left; border: 0; padding: 0; background: transparent; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }.gantt-project-title:hover { color: #5b21b6; text-decoration: underline; }.gantt-project small { color: #aaa4b1; font-size: 8px; margin-top: 3px; }
 .gantt-track { position: relative; display: grid; grid-template-columns: repeat(42, 1fr); min-height: 45px; }
 .gantt-cell { border-left: 1px solid #f4f2f6; }.gantt-cell.today-col { background: #f8f6fb; border-left-color: #e5def0; }
 .plan-bar { position: absolute; z-index: 2; top: 15px; height: 16px; border-radius: 5px; display: flex; align-items: center; padding: 0 7px; white-space: nowrap; overflow: hidden; min-width: 7px; touch-action: none; cursor: grab; user-select: none; }.plan-bar.dragging { cursor: grabbing; box-shadow: 0 0 0 2px #76629b44; }.plan-bar span { font-size: 7px; font-weight: 700; pointer-events: none; }
