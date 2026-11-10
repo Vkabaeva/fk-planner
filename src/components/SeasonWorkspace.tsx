@@ -65,7 +65,7 @@ export default function SeasonWorkspace(props: Props) {
         })}
         <button className="add-lane" onClick={() => props.onSetModal('nomination')}>＋ Новый левел</button>
       </section>
-    ) : <GanttView projects={projects} nominations={season.nominations} onWindowChange={props.onWindowChange} />}
+    ) : <GanttView projects={projects} nominations={season.nominations} onWindowChange={props.onWindowChange} onOpen={props.onOpen} />}
     <footer className="page-footer"><span>{cloudError ? 'Не удалось синхронизировать последние изменения.' : !cloudEnabled ? 'Локальный режим: сохранено в этом браузере' : saveState === 'saving' ? 'Сохраняем изменения…' : saveState === 'saved' ? 'Все изменения сохранены' : 'Сезоны и работы синхронизируются с облаком'}</span>{cloudError && cloudEnabled && <button type="button" className="notes-edit-button" onClick={props.onRetrySync}>Повторить синхронизацию</button>}</footer>
   </div>
 }

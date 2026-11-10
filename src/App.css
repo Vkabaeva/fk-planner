@@ -236,7 +236,7 @@ form label small { color: #9b95a3; font-size: 9px; font-weight: 400; }
 .gantt-days div.today-col { background: #f3f0f9; color: #6f5c96; border-left-color: #d2c5e7; }
 .gantt-row { min-height: 45px; border-top: 1px solid #f4f2f6; }
 .gantt-project { padding: 7px 8px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-.gantt-project b { color: #4b455b; font-size: 9px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }.gantt-project small { color: #aaa4b1; font-size: 8px; margin-top: 3px; }
+.gantt-project-title { color: #4b455b; font: 600 16px/1.25 'IBM Plex Sans', sans-serif; text-align: left; border: 0; padding: 0; background: transparent; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }.gantt-project-title:hover { color: #5b21b6; text-decoration: underline; }.gantt-project small { color: #aaa4b1; font-size: 8px; margin-top: 3px; }
 .gantt-track { position: relative; display: grid; grid-template-columns: repeat(42, 1fr); min-height: 45px; }
 .gantt-cell { border-left: 1px solid #f4f2f6; }.gantt-cell.today-col { background: #f8f6fb; border-left-color: #e5def0; }
 .plan-bar { position: absolute; z-index: 2; top: 15px; height: 16px; border-radius: 5px; display: flex; align-items: center; padding: 0 7px; white-space: nowrap; overflow: hidden; min-width: 7px; touch-action: none; cursor: grab; user-select: none; }.plan-bar.dragging { cursor: grabbing; box-shadow: 0 0 0 2px #76629b44; }.plan-bar span { font-size: 7px; font-weight: 700; pointer-events: none; }
@@ -248,7 +248,7 @@ form label small { color: #9b95a3; font-size: 9px; font-weight: 400; }
 .hard-marker.app-tooltip { cursor: help; }
 .app-tooltip::after { content: attr(data-tooltip); position: absolute; z-index: 30; left: 50%; bottom: calc(100% + 8px); width: max-content; max-width: 220px; padding: 7px 10px; color: #fff; background: var(--stone-900); border: 1px solid var(--stone-700); border-radius: 6px; box-shadow: 0 4px 12px #1c19172b; font-size: 12px; font-weight: 500; line-height: 1.35; white-space: nowrap; opacity: 0; visibility: hidden; pointer-events: none; transform: translate(-50%, 3px); transition: opacity .12s ease, transform .12s ease, visibility .12s ease; }
 .app-tooltip:hover::after, .app-tooltip:focus-visible::after { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
-.gantt-row.has-conflict .gantt-project b { color: #b26871; }
+.gantt-row.has-conflict .gantt-project-title { color: #b26871; }
 .gantt-empty { padding: 38px 10px; color: #9b96a4; text-align: center; font-size: 11px; }
 .conflict-note, .gantt-bottom-note { color: #a1775d; background: #fff8ed; border: 1px solid #f2e6d5; border-radius: 8px; padding: 9px 11px; margin-top: 11px; font-size: 9px; }
 .gantt-bottom-note { color: #9993a1; background: #faf9fc; border-color: #efedf3; }
@@ -517,13 +517,13 @@ form input::placeholder, form textarea::placeholder, form label small { color: v
 .gantt-days div, .gantt-cell { border-left-color: var(--stone-100); }
 .gantt-days div.today-col { color: var(--violet-800); background: var(--violet-50); border-left-color: var(--violet-200); }
 .gantt-row { border-top-color: var(--stone-100); }
-.gantt-project b { color: var(--stone-800); }
+.gantt-project-title { color: var(--stone-800); }
 .gantt-cell.today-col { background: var(--violet-50); border-left-color: var(--violet-100); }
 .plan-bar.text-type { color: var(--vino-900); background: var(--vino-200); }
 .plan-bar.art-type { color: var(--violet-900); background: var(--violet-200); }
 .plan-bar.craft-type { color: #075b2b; background: var(--green-200); }
 .plan-bar.dragging { box-shadow: 0 0 0 2px #7c3aed55; }
-.gantt-row.has-conflict .gantt-project b { color: var(--vino-800); }
+.gantt-row.has-conflict .gantt-project-title { color: var(--vino-800); }
 .gantt-empty { color: var(--stone-500); }
 .conflict-note { color: #8f3b00; background: var(--orange-50); border-color: var(--orange-100); }
 .gantt-bottom-note { color: var(--stone-600); background: var(--stone-50); border-color: var(--stone-200); }

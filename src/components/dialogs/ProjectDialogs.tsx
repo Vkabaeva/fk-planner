@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import type { Category, Project, ProjectImageAttachment, Season } from '../../domain/types'
 import { categories, workflows } from '../../domain/constants'
-import { formatDate, todayISO } from '../../utils/dates'
+import { formatDate } from '../../utils/dates'
 import { typeClass } from '../../utils/presentation'
 import { defaultSoftDeadline, getLevelDefaults } from '../../domain/projectDefaults'
 import { loadProjectImage } from '../../data/projectImages'
@@ -18,7 +18,7 @@ export function ProjectForm({ season, onSave, initial, initialNominationId }: { 
   const [nominationId, setNominationId] = useState(initialLevel?.id ?? '')
   const [rating, setRating] = useState(initial?.rating ?? initialDefaults.rating)
   const [targetWords, setTargetWords] = useState(String(initial?.targetWords ?? initialDefaults.targetWords))
-  const [softStart, setSoftStart] = useState(initial?.softStart ?? todayISO())
+  const [softStart, setSoftStart] = useState(initial?.softStart ?? '')
   const [softEnd, setSoftEnd] = useState(initial?.softEnd ?? defaultSoftDeadline(initialLevel?.deadline ?? ''))
   const nomination = season.nominations.find((item) => item.id === nominationId)
   const hardDeadline = nomination?.deadline ?? ''
