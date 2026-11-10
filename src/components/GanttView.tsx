@@ -1,4 +1,4 @@
-import { useRef, useState, type PointerEvent as ReactPointerEvent } from 'react'
+import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react'
 import type { Nomination, Project } from '../domain/types'
 import { workflows } from '../domain/constants'
 import { APP_CONFIG } from '../config/appConfig'
@@ -11,10 +11,10 @@ type PlanDrag = { id: string; mode: 'move' | 'start' | 'end'; originX: number; s
 export function GanttView({ projects, nominations, onWindowChange, onOpen }: { projects: Project[]; nominations: Nomination[]; onWindowChange: (id: string, start: string, end: string) => void; onOpen: (id: string) => void }) {
   const [drag, setDrag] = useState<PlanDrag | null>(null)
   const dragRef = useRef<PlanDrag | null>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
   const today = todayISO()
-  const earliest = [today, ...projects.map((project) => project.softStart).filter(Boolean)].sort()[0]
-  const start = new Date(`${earliest}T12:00:00`); start.setDate(start.getDate() - APP_CONFIG.planning.ganttStartPaddingDays)
-  const startValue = localISO(start)
+  const earliestStartedTask = projects.map((project) => project.softStart).filter((softStart) => softStart && softStart <= today).sort()[0]
+  const startValue = earliestStartedTask ? addDays(earliestStartedTask, -APP_CONFIG.planning.ganttStartPaddingDays) : today
   const latest = [today, ...projects.map((project) => project.softEnd).filter(Boolean), ...nominations.map((item) => item.deadline).filter(Boolean)].sort().at(-1) ?? today
   const minimumEnd = new Date(`${today}T12:00:00`); minimumEnd.setDate(minimumEnd.getDate() + APP_CONFIG.planning.ganttMinimumDaysAhead)
   const endValue = latest > localISO(minimumEnd) ? latest : localISO(minimumEnd)
@@ -22,6 +22,9 @@ export function GanttView({ projects, nominations, onWindowChange, onOpen }: { p
   const dayWidth = APP_CONFIG.planning.ganttDayWidthPx
   const days = Array.from({ length: daysCount }, (_, index) => { const date = new Date(`${startValue}T12:00:00`); date.setDate(date.getDate() + index); return date })
   const todayIndex = daysBetween(startValue, today)
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollLeft = todayIndex * dayWidth
+  }, [dayWidth, todayIndex])
   const conflicts = getScheduleConflicts(projects)
   const conflictIds = new Set(conflicts.flat().map((project) => project.id))
   const beginDrag = (event: ReactPointerEvent<HTMLElement>, project: Project, mode: PlanDrag['mode']) => {
@@ -54,7 +57,7 @@ export function GanttView({ projects, nominations, onWindowChange, onOpen }: { p
     dragRef.current = null; setDrag(null)
   }
   const sortedProjects = sortProjectsForGantt(projects, nominations)
-  return <div className="gantt-wrap"><div className="gantt-legend"><span><i className="legend-plan" /> Плановое окно</span><span><i className="legend-hard" /> Хард-дедлайн</span><span className="gantt-note">Полосу можно будет двигать, чтобы сдвинуть план</span></div><div className="gantt-scroll"><div className="gantt-chart">
+  return <div className="gantt-wrap"><div className="gantt-legend"><span><i className="legend-plan" /> Плановое окно</span><span><i className="legend-hard" /> Хард-дедлайн</span><span className="gantt-note">Полосу можно будет двигать, чтобы сдвинуть план</span></div><div className="gantt-scroll" ref={scrollRef}><div className="gantt-chart">
     <div className="gantt-header"><div className="gantt-label-head">РАБОТА</div><div className="gantt-days" style={{ gridTemplateColumns: `repeat(${days.length}, ${dayWidth}px)` }}>{days.map((date, index) => <div key={index} className={`${date.getDate() === 1 ? 'month-start' : ''} ${index === todayIndex ? 'today-col' : ''}`}><span>{date.getDate() === 1 ? new Intl.DateTimeFormat('ru-RU', { month: 'short' }).format(date) : ''}</span><b>{date.getDate()}</b></div>)}</div></div>
     {sortedProjects.map((project) => {
         const category = project.category

@@ -229,13 +229,13 @@ form label small { color: #9b95a3; font-size: 9px; font-weight: 400; }
 .gantt-scroll { overflow-x: auto; }
 .gantt-chart { min-width: 900px; }
 .gantt-header, .gantt-row { display: grid; grid-template-columns: 190px minmax(680px, 1fr); }
-.gantt-label-head { display: flex; align-items: center; padding-left: 8px; color: #aaa5b2; font-size: 8px; letter-spacing: .8px; font-weight: 700; }
+.gantt-label-head { position: sticky; left: 0; z-index: 4; display: flex; align-items: center; padding-left: 8px; color: #aaa5b2; background: #fff; font-size: 8px; letter-spacing: .8px; font-weight: 700; }
 .gantt-days { height: 44px; display: grid; grid-template-columns: repeat(42, 1fr); border-bottom: 1px solid #eeecf2; }
 .gantt-days div { display: flex; flex-direction: column; justify-content: center; align-items: center; color: #aaa5b2; font-size: 8px; border-left: 1px solid #f1eff4; }
 .gantt-days div span { height: 11px; color: #998ea9; font-size: 7px; text-transform: uppercase; }.gantt-days div b { font-weight: 500; }
 .gantt-days div.today-col { background: #f3f0f9; color: #6f5c96; border-left-color: #d2c5e7; }
 .gantt-row { min-height: 45px; border-top: 1px solid #f4f2f6; }
-.gantt-project { padding: 7px 8px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.gantt-project { position: sticky; left: 0; z-index: 3; padding: 7px 8px; display: flex; flex-direction: column; justify-content: center; min-width: 0; background: #fff; }
 .gantt-project-title { color: #4b455b; font: 600 14px/1.25 'IBM Plex Sans', sans-serif; text-align: left; border: 0; padding: 0; background: transparent; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }.gantt-project-title:hover { color: #5b21b6; text-decoration: underline; }.gantt-project small { color: #aaa4b1; font-size: 8px; margin-top: 3px; }
 .gantt-track { position: relative; display: grid; grid-template-columns: repeat(42, 1fr); min-height: 45px; }
 .gantt-cell { border-left: 1px solid #f4f2f6; }.gantt-cell.today-col { background: #f8f6fb; border-left-color: #e5def0; }
