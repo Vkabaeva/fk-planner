@@ -226,18 +226,19 @@ form label small { color: #9b95a3; font-size: 9px; font-weight: 400; }
 .gantt-wrap { border: 1px solid #ece9f1; background: #fff; border-radius: 12px; padding: 14px; overflow: hidden; }
 .gantt-legend { display: flex; align-items: center; gap: 15px; color: #928d9a; font-size: 9px; padding: 0 4px 13px; }
 .gantt-legend span { display: inline-flex; align-items: center; gap: 5px; }.legend-plan { width: 14px; height: 6px; border-radius: 3px; background: #b8a8d9; }.legend-hard { width: 2px; height: 12px; background: #d38c8c; }.gantt-note { margin-left: auto; color: #aaa5b1; }
-.gantt-scroll { overflow-x: auto; }
-.gantt-chart { min-width: 900px; }
-.gantt-header, .gantt-row { display: grid; grid-template-columns: 190px minmax(680px, 1fr); }
-.gantt-label-head { position: sticky; left: 0; z-index: 4; display: flex; align-items: center; padding-left: 8px; color: #aaa5b2; background: #fff; font-size: 8px; letter-spacing: .8px; font-weight: 700; }
-.gantt-days { height: 44px; display: grid; grid-template-columns: repeat(42, 1fr); border-bottom: 1px solid #eeecf2; }
+.gantt-board { display: grid; grid-template-columns: 190px minmax(0, 1fr); align-items: start; }
+.gantt-label-column { min-width: 0; background: #fff; }
+.gantt-scroll { min-width: 0; width: 100%; overflow-x: auto; overflow-y: hidden; }
+.gantt-chart { width: max-content; }
+.gantt-label-head { box-sizing: border-box; height: 44px; display: flex; align-items: center; padding-left: 8px; color: #aaa5b2; background: #fff; font-size: 8px; letter-spacing: .8px; font-weight: 700; }
+.gantt-days { width: max-content; height: 44px; display: grid; grid-template-columns: repeat(42, 1fr); border-bottom: 1px solid #eeecf2; }
 .gantt-days div { display: flex; flex-direction: column; justify-content: center; align-items: center; color: #aaa5b2; font-size: 8px; border-left: 1px solid #f1eff4; }
 .gantt-days div span { height: 11px; color: #998ea9; font-size: 7px; text-transform: uppercase; }.gantt-days div b { font-weight: 500; }
 .gantt-days div.today-col { background: #f3f0f9; color: #6f5c96; border-left-color: #d2c5e7; }
-.gantt-row { min-height: 45px; border-top: 1px solid #f4f2f6; }
-.gantt-project { position: sticky; left: 0; z-index: 3; padding: 7px 8px; display: flex; flex-direction: column; justify-content: center; min-width: 0; background: #fff; }
-.gantt-project-title { color: #4b455b; font: 600 14px/1.25 'IBM Plex Sans', sans-serif; text-align: left; border: 0; padding: 0; background: transparent; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }.gantt-project-title:hover { color: #5b21b6; text-decoration: underline; }.gantt-project small { color: #aaa4b1; font-size: 8px; margin-top: 3px; }
-.gantt-track { position: relative; display: grid; grid-template-columns: repeat(42, 1fr); min-height: 45px; }
+.gantt-row { box-sizing: border-box; height: 50px; min-height: 50px; border-top: 1px solid #f4f2f6; }
+.gantt-project { padding: 7px 8px; display: flex; flex-direction: column; justify-content: center; min-width: 0; background: #fff; }
+.gantt-project-title { color: #4b455b; font: 600 14px/1.25 'IBM Plex Sans', sans-serif; text-align: left; border: 0; padding: 0; background: transparent; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }.gantt-project-title:hover { color: #5b21b6; text-decoration: underline; }.gantt-project small { color: #aaa4b1; font-size: 8px; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gantt-track { position: relative; display: grid; width: max-content; grid-template-columns: repeat(42, 1fr); min-height: 45px; }
 .gantt-cell { border-left: 1px solid #f4f2f6; }.gantt-cell.today-col { background: #f8f6fb; border-left-color: #e5def0; }
 .plan-bar { position: absolute; z-index: 2; top: 15px; height: 16px; border-radius: 5px; display: flex; align-items: center; padding: 0 7px; white-space: nowrap; overflow: hidden; min-width: 7px; touch-action: none; cursor: grab; user-select: none; }.plan-bar.dragging { cursor: grabbing; box-shadow: 0 0 0 2px #76629b44; }.plan-bar span { font-size: 7px; font-weight: 700; pointer-events: none; }
 .resize-handle { display: block; flex: 0 0 5px; align-self: stretch; border: 0; background: transparent; padding: 0; opacity: 0; cursor: ew-resize; touch-action: none; }
