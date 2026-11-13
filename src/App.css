@@ -371,9 +371,9 @@ h2, h3, .section-heading h2, .project-card h3, .season-card h2, .modal-heading h
 .icon-button svg { width: 16px; height: 16px; }
 .icon-button.danger:hover { color: var(--vino-800); background: var(--vino-50); }
 .project-card { border-color: var(--stone-200); border-radius: 8px; box-shadow: 0 1px 3px #1c19170a; }
-.text-type.type-tag { color: var(--vino-800); background: var(--vino-100); }
-.art-type.type-tag { color: var(--plum-800); background: var(--plum-100); }
-.craft-type.type-tag { color: var(--violet-800); background: var(--violet-100); }
+.text-type.type-tag { color: var(--plum-800); background: var(--plum-100); }
+.art-type.type-tag { color: var(--violet-800); background: var(--violet-100); }
+.craft-type.type-tag { color: var(--plum-700); background: var(--plum-50); }
 .project-card h3 { color: var(--stone-900); }
 .stage-line { background: var(--stone-50); border-color: var(--stone-200); border-radius: 8px; }
 .stage-label span { color: var(--stone-500); }
