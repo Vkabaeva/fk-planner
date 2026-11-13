@@ -131,15 +131,17 @@ h1 { font: 700 27px 'Manrope', sans-serif; letter-spacing: -.8px; margin: 6px 0 
 .fandom-tag { display: inline-flex; align-items: center; max-width: 190px; overflow: hidden; padding: 4px 7px; border-radius: 6px; color: var(--stone-700); background: var(--stone-100); font-size: 11px; font-weight: 600; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
 .type-tag { font-size: 11px; font-weight: 700; padding: 4px 7px; border-radius: 6px; }
 .category-icon { width: 1.1em; height: 1.1em; vertical-align: -0.16em; }
-.rating-tag, .deadline-tag, .size-tag { display: inline-flex; align-items: center; border-radius: 6px; padding: 4px 7px; font-size: 11px; line-height: 1.2; font-weight: 700; white-space: nowrap; }
-.rating-g { color: #3c765d; background: #e7f4ec; }
-.rating-pg13 { color: #436994; background: #eaf1f9; }
-.rating-r { color: #9a4551; background: #f9e8eb; }
-.rating-nc17 { color: #923f45; background: #f4dfe1; }
-.rating-other { color: #6c5c8c; background: #f0ebf8; }
-.rating-none { color: #746e7a; background: #f0eeef; }
-.deadline-tag { color: #625d67; background: var(--stone-100); font-weight: 600; }
-.size-tag { color: var(--violet-800); background: var(--violet-50); }
+.rating-tag, .size-tag { display: inline-flex; align-items: center; border-radius: 6px; padding: 4px 7px; font-size: 11px; line-height: 1.2; font-weight: 700; white-space: nowrap; }
+.rating-g { color: var(--vino-700); background: var(--vino-50); }
+.rating-pg13 { color: var(--vino-800); background: var(--vino-100); }
+.rating-r { color: var(--vino-900); background: var(--vino-200); }
+.rating-nc17 { color: #fff; background: var(--vino-700); }
+.rating-other { color: var(--violet-800); background: var(--violet-50); }
+.rating-none { color: var(--stone-600); background: var(--stone-100); }
+.size-drabble { color: var(--green-600); background: var(--green-50); }
+.size-mini { color: var(--green-600); background: var(--green-100); }
+.size-midi { color: var(--green-600); background: var(--green-200); }
+.size-maxi { color: #fff; background: var(--green-600); }
 .notes-indicator { flex: 0 0 28px; width: 28px; height: 26px; display: inline-grid; place-items: center; border: 1px solid var(--violet-100); border-radius: 6px; color: var(--violet-800); background: var(--violet-50); font-size: 15px; line-height: 1; }
 .text-type.type-tag { color: #7462a2; background: #f0ebfa; }.art-type.type-tag { color: #a26674; background: #fbeef1; }.craft-type.type-tag { color: #678f80; background: #eaf5ef; }
 .card-menu { font-size: 17px; line-height: 1; }
@@ -277,7 +279,7 @@ form label small { color: #9b95a3; font-size: 9px; font-weight: 400; }
 .stat-card small, .view-switch button { font-size: 14px; }
 .lane-name strong { font-size: 15px; }
 .count-pill { font-size: 13px; }
-.lane-deadline, .type-tag, .rating-tag, .deadline-tag, .size-tag, .word-caption, .gantt-legend, .gantt-empty { font-size: 13px; }
+.lane-deadline, .type-tag, .rating-tag, .size-tag, .word-caption, .gantt-legend, .gantt-empty { font-size: 13px; }
 .project-card h3 { font-size: 16px; }
 .stage-label span { font-size: 11px; }
 .stage-label b { font-size: 13px; }
