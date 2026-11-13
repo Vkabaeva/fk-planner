@@ -128,10 +128,9 @@ h1 { font: 700 27px 'Manrope', sans-serif; letter-spacing: -.8px; margin: 6px 0 
 .project-card[draggable="true"]:focus-visible { outline: 2px solid var(--violet-500); outline-offset: 2px; }
 .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 .card-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
-.fandom-tag { display: inline-flex; align-items: center; max-width: 190px; overflow: hidden; padding: 4px 7px; border-radius: 6px; color: var(--sky-800); background: var(--sky-100); font-size: 11px; font-weight: 600; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
-.type-tag { font-size: 11px; font-weight: 700; padding: 4px 7px; border-radius: 6px; }
+.fandom-tag, .type-tag, .rating-tag, .size-tag { display: inline-flex; align-items: center; border-radius: 6px; padding: 4px 7px; font-size: 13px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.fandom-tag { max-width: 190px; overflow: hidden; color: var(--sky-800); background: var(--sky-100); text-overflow: ellipsis; }
 .category-icon { width: 1.1em; height: 1.1em; vertical-align: -0.16em; }
-.rating-tag, .size-tag { display: inline-flex; align-items: center; border-radius: 6px; padding: 4px 7px; font-size: 11px; line-height: 1.2; font-weight: 700; white-space: nowrap; }
 .rating-g { color: var(--vino-700); background: var(--vino-50); }
 .rating-pg13 { color: var(--vino-800); background: var(--vino-100); }
 .rating-r { color: #fff; background: var(--vino-600); }
@@ -142,7 +141,6 @@ h1 { font: 700 27px 'Manrope', sans-serif; letter-spacing: -.8px; margin: 6px 0 
 .size-mini { color: var(--green-600); background: var(--green-100); }
 .size-midi { color: var(--green-600); background: var(--green-200); }
 .size-maxi { color: #fff; background: var(--green-600); }
-.notes-indicator { flex: 0 0 28px; width: 28px; height: 26px; display: inline-grid; place-items: center; border: 1px solid var(--violet-100); border-radius: 6px; color: var(--violet-800); background: var(--violet-50); font-size: 15px; line-height: 1; }
 .card-menu { font-size: 17px; line-height: 1; }
 .project-card h3 { color: #38334a; font: 700 14px 'Manrope', sans-serif; line-height: 1.5; margin: 8px 0 5px; }
 .project-description { color: #78716c; font-size: 13px; line-height: 1.45; margin: 0 0 9px; white-space: pre-wrap; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
@@ -278,7 +276,7 @@ form label small { color: #9b95a3; font-size: 9px; font-weight: 400; }
 .stat-card small, .view-switch button { font-size: 14px; }
 .lane-name strong { font-size: 15px; }
 .count-pill { font-size: 13px; }
-.lane-deadline, .type-tag, .rating-tag, .size-tag, .word-caption, .gantt-legend, .gantt-empty { font-size: 13px; }
+.lane-deadline, .fandom-tag, .type-tag, .rating-tag, .size-tag, .word-caption, .gantt-legend, .gantt-empty { font-size: 13px; }
 .project-card h3 { font-size: 16px; }
 .stage-label span { font-size: 11px; }
 .stage-label b { font-size: 13px; }
