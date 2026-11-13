@@ -60,6 +60,7 @@ function decodeProject(value: unknown): Project {
     id: requiredString(value.id, 'project.id'),
     title: requiredString(value.title, 'project.title'),
     category: value.category as Category,
+    fandom: typeof value.fandom === 'string' ? value.fandom : '',
     nominationId: requiredString(value.nominationId, 'project.nominationId'),
     rating: requiredString(value.rating, 'project.rating'),
     description: optionalString(value.description, 'project.description'),

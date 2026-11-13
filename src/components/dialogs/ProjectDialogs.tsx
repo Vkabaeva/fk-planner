@@ -13,6 +13,7 @@ export function ProjectForm({ season, onSave, initial, initialNominationId }: { 
   const initialLevel = season.nominations.find((item) => item.id === preferredNominationId) ?? season.nominations[0]
   const initialDefaults = getLevelDefaults(initialLevel?.name ?? '')
   const [title, setTitle] = useState(initial?.title ?? '')
+  const [fandom, setFandom] = useState(initial?.fandom ?? '')
   const [description, setDescription] = useState(initial?.description ?? '')
   const [category, setCategory] = useState<Category>(initial?.category ?? initialDefaults.category)
   const [nominationId, setNominationId] = useState(initialLevel?.id ?? '')
@@ -33,9 +34,10 @@ export function ProjectForm({ season, onSave, initial, initialNominationId }: { 
     setTargetWords(String(defaults.targetWords))
     setSoftEnd(defaultSoftDeadline(nextNomination?.deadline ?? ''))
   }
-  return <ValidatedForm onSubmit={() => { if (title.trim() && nominationId && !dateError) onSave({ title: title.trim(), category, nominationId, rating, description: description.trim(), notes: initial?.notes ?? '', targetWords: category === 'Текст' ? Number(targetWords) || 0 : 0, softStart, softEnd: actualEnd }) }}>
+  return <ValidatedForm onSubmit={() => { if (title.trim() && fandom.trim() && nominationId && !dateError) onSave({ title: title.trim(), category, fandom: fandom.trim(), nominationId, rating, description: description.trim(), notes: initial?.notes ?? '', targetWords: category === 'Текст' ? Number(targetWords) || 0 : 0, softStart, softEnd: actualEnd }) }}>
     <label>Название работы<input autoFocus required placeholder="Как ты пока называешь эту идею?" value={title} onChange={(event) => setTitle(event.target.value)} /></label>
     <div className="form-row"><label>Тип работы<select value={category} onChange={(event) => setCategory(event.target.value as Category)}>{categories.map((item) => <option key={item}>{item}</option>)}</select></label><label>Рейтинг<select value={rating} onChange={(event) => setRating(event.target.value)}><option value="">Пока не выбран</option><option>G</option><option>PG-13</option><option>R</option><option>NC-17</option><option>Другое</option></select></label></div>
+    <label>Фандом<input required pattern=".*\S.*" placeholder="Например, название вселенной или фандома" value={fandom} onChange={(event) => setFandom(event.target.value)} /></label>
     {category === 'Текст' ? <div className="form-row">
       <label>Левел<select value={nominationId} onChange={(event) => changeLevel(event.target.value)}>{season.nominations.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
       <label>Цель по объёму слов<input type="number" min="0" step="100" value={targetWords} onChange={(event) => setTargetWords(event.target.value)} /></label>
@@ -111,6 +113,7 @@ export function ProjectDetailsForm({ project, levelName, hardDeadline, onSave, a
   return <div className="project-details-view">
     <div className="project-details-tags">
       <span className={`type-tag ${typeClass(project.category)}`}><CategoryIcon category={project.category} /> {project.category}</span>
+      {project.fandom && <span className="detail-chip">Фандом · {project.fandom}</span>}
       <span className={`rating-tag ${projectRatingClass(project.rating)}`}>{project.rating || 'Без рейтинга'}</span>
       {levelName && <span className="detail-chip">Левел · {levelName}</span>}
       {hardDeadline && <span className="detail-chip">Хард-дедлайн · {formatDate(hardDeadline)}</span>}

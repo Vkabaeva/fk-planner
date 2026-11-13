@@ -10,6 +10,7 @@ export type Project = {
   id: string
   title: string
   category: Category
+  fandom: string
   nominationId: string
   rating: string
   description?: string
