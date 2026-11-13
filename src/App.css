@@ -128,7 +128,7 @@ h1 { font: 700 27px 'Manrope', sans-serif; letter-spacing: -.8px; margin: 6px 0 
 .project-card[draggable="true"]:focus-visible { outline: 2px solid var(--violet-500); outline-offset: 2px; }
 .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 .card-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
-.fandom-tag, .type-tag, .rating-tag, .size-tag { display: inline-flex; align-items: center; border-radius: 6px; padding: 4px 7px; font-size: 13px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.fandom-tag, .type-tag, .rating-tag, .size-tag { box-sizing: border-box; display: inline-flex; align-items: center; height: 24px; min-height: 24px; border-radius: 6px; padding: 4px 7px; font-size: 13px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
 .fandom-tag { max-width: 190px; overflow: hidden; color: var(--sky-800); background: var(--sky-100); text-overflow: ellipsis; }
 .category-icon { width: 1.1em; height: 1.1em; vertical-align: -0.16em; }
 .rating-g { color: var(--vino-700); background: var(--vino-50); }
