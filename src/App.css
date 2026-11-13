@@ -128,14 +128,14 @@ h1 { font: 700 27px 'Manrope', sans-serif; letter-spacing: -.8px; margin: 6px 0 
 .project-card[draggable="true"]:focus-visible { outline: 2px solid var(--violet-500); outline-offset: 2px; }
 .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 .card-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
-.fandom-tag { display: inline-flex; align-items: center; max-width: 190px; overflow: hidden; padding: 4px 7px; border-radius: 6px; color: var(--stone-700); background: var(--stone-100); font-size: 11px; font-weight: 600; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+.fandom-tag { display: inline-flex; align-items: center; max-width: 190px; overflow: hidden; padding: 4px 7px; border-radius: 6px; color: var(--sky-800); background: var(--sky-100); font-size: 11px; font-weight: 600; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
 .type-tag { font-size: 11px; font-weight: 700; padding: 4px 7px; border-radius: 6px; }
 .category-icon { width: 1.1em; height: 1.1em; vertical-align: -0.16em; }
 .rating-tag, .size-tag { display: inline-flex; align-items: center; border-radius: 6px; padding: 4px 7px; font-size: 11px; line-height: 1.2; font-weight: 700; white-space: nowrap; }
 .rating-g { color: var(--vino-700); background: var(--vino-50); }
 .rating-pg13 { color: var(--vino-800); background: var(--vino-100); }
-.rating-r { color: var(--vino-900); background: var(--vino-200); }
-.rating-nc17 { color: #fff; background: var(--vino-700); }
+.rating-r { color: #fff; background: var(--vino-600); }
+.rating-nc17 { color: #fff; background: var(--vino-800); }
 .rating-other { color: var(--violet-800); background: var(--violet-50); }
 .rating-none { color: var(--stone-600); background: var(--stone-100); }
 .size-drabble { color: var(--green-600); background: var(--green-50); }
@@ -143,7 +143,6 @@ h1 { font: 700 27px 'Manrope', sans-serif; letter-spacing: -.8px; margin: 6px 0 
 .size-midi { color: var(--green-600); background: var(--green-200); }
 .size-maxi { color: #fff; background: var(--green-600); }
 .notes-indicator { flex: 0 0 28px; width: 28px; height: 26px; display: inline-grid; place-items: center; border: 1px solid var(--violet-100); border-radius: 6px; color: var(--violet-800); background: var(--violet-50); font-size: 15px; line-height: 1; }
-.text-type.type-tag { color: #7462a2; background: #f0ebfa; }.art-type.type-tag { color: #a26674; background: #fbeef1; }.craft-type.type-tag { color: #678f80; background: #eaf5ef; }
 .card-menu { font-size: 17px; line-height: 1; }
 .project-card h3 { color: #38334a; font: 700 14px 'Manrope', sans-serif; line-height: 1.5; margin: 8px 0 5px; }
 .project-description { color: #78716c; font-size: 13px; line-height: 1.45; margin: 0 0 9px; white-space: pre-wrap; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
@@ -373,8 +372,8 @@ h2, h3, .section-heading h2, .project-card h3, .season-card h2, .modal-heading h
 .icon-button.danger:hover { color: var(--vino-800); background: var(--vino-50); }
 .project-card { border-color: var(--stone-200); border-radius: 8px; box-shadow: 0 1px 3px #1c19170a; }
 .text-type.type-tag { color: var(--vino-800); background: var(--vino-100); }
-.art-type.type-tag { color: var(--violet-800); background: var(--violet-100); }
-.craft-type.type-tag { color: var(--green-600); background: var(--green-100); }
+.art-type.type-tag { color: var(--plum-800); background: var(--plum-100); }
+.craft-type.type-tag { color: var(--violet-800); background: var(--violet-100); }
 .project-card h3 { color: var(--stone-900); }
 .stage-line { background: var(--stone-50); border-color: var(--stone-200); border-radius: 8px; }
 .stage-label span { color: var(--stone-500); }
