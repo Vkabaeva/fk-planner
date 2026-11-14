@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function LaneCards({ projectCount, children, onAdd }: Props) {
-  const columns = projectCount >= 4 ? 4 : 3
+  const columns = projectCount >= 4 ? 4 : projectCount >= 3 ? 3 : 2
   const style = { '--project-columns': columns } as CSSProperties
 
   return <div className="lane-cards" style={style}>
