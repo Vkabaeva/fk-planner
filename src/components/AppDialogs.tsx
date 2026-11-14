@@ -46,7 +46,7 @@ export default function AppDialogs(props: Props) {
   const targetNomination = selectedProject && store.seasons.flatMap((item) => item.nominations).find((item) => item.id === selectedProject.nominationId)
 
   return <>
-    {modal && <Dialog title={modal === 'project-details' ? selectedProject?.title ?? 'Карточка работы' : modalTitle(modal)} onClose={props.onClose} confirmDiscard={['season', 'nomination', 'project', 'edit-project', 'project-details', 'edit-profile'].includes(modal)}>
+    {modal && <Dialog title={modal === 'project-details' ? selectedProject?.title ?? 'Карточка работы' : modalTitle(modal)} onClose={props.onClose} confirmDiscard={['season', 'nomination', 'project', 'edit-project', 'project-details', 'edit-profile'].includes(modal)} wide={['project', 'edit-project', 'project-details'].includes(modal)}>
       {modal === 'season' && <SeasonForm onSave={props.onAddSeason} />}
       {modal === 'edit-season' && editingSeason && <SeasonForm initial={editingSeason} onSave={(name, start, end) => props.onUpdateSeason(editingSeason.id, name, start, end)} />}
       {modal === 'nomination' && <NominationForm onSave={props.onAddNomination} />}

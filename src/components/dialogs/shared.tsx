@@ -17,7 +17,7 @@ export function ValidatedForm({ onSubmit, children }: { onSubmit: (event: FormEv
   }}>{children}</form>
 }
 
-export function Dialog({ title, onClose, children, confirmDiscard = false }: { title: string; onClose: () => void; children: ReactNode; confirmDiscard?: boolean }) {
+export function Dialog({ title, onClose, children, confirmDiscard = false, wide = false }: { title: string; onClose: () => void; children: ReactNode; confirmDiscard?: boolean; wide?: boolean }) {
   const [discardPromptOpen, setDiscardPromptOpen] = useState(false)
   const [hasUnsavedInput, setHasUnsavedInput] = useState(false)
   useEffect(() => {
@@ -33,7 +33,7 @@ export function Dialog({ title, onClose, children, confirmDiscard = false }: { t
   }
 
   return <>
-    <div className="modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) requestClose() }}><section className="modal"><div className="modal-heading"><div><span className="eyebrow">FK PLANNER</span><h2>{title}</h2></div><button className="close-button" aria-label="Закрыть окно" onClick={requestClose}>×</button></div><FormDirtyContext.Provider value={setHasUnsavedInput}>{children}</FormDirtyContext.Provider></section></div>
+    <div className="modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) requestClose() }}><section className={`modal${wide ? ' modal-wide' : ''}`}><div className="modal-heading"><div><span className="eyebrow">FK PLANNER</span><h2>{title}</h2></div><button className="close-button" aria-label="Закрыть окно" onClick={requestClose}>×</button></div><FormDirtyContext.Provider value={setHasUnsavedInput}>{children}</FormDirtyContext.Provider></section></div>
     {discardPromptOpen && <div className="modal-backdrop confirm-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setDiscardPromptOpen(false) }}>
       <section className="modal confirmation-modal discard-modal" role="alertdialog" aria-modal="true" aria-labelledby="discard-title" aria-describedby="discard-message">
         <div className="modal-heading"><div><span className="eyebrow">НЕСОХРАНЁННЫЕ ДАННЫЕ</span><h2 id="discard-title">Закрыть без сохранения?</h2></div><button className="close-button" aria-label="Продолжить заполнение" onClick={() => setDiscardPromptOpen(false)}>×</button></div>

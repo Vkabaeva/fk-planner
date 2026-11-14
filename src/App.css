@@ -406,6 +406,7 @@ h2, h3, .section-heading h2, .project-card h3, .season-card h2, .modal-heading h
 .first-run-art > span:nth-child(3) { color: var(--green-400); }
 .modal-backdrop { background: #1c191766; }
 .modal { border: 1px solid var(--stone-200); border-radius: 8px; box-shadow: 0 12px 32px #1c19172b; }
+.modal-wide { width: min(100%, 760px); }
 .modal-heading { border-bottom: 1px solid var(--stone-200); padding-bottom: 14px; }
 .modal-heading h2 { color: var(--stone-900); }
 .close-button { border-radius: 6px; color: var(--stone-600); background: var(--stone-100); }
