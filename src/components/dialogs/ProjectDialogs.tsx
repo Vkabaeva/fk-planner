@@ -35,15 +35,23 @@ export function ProjectForm({ season, onSave, initial, initialNominationId }: { 
     setSoftEnd(defaultSoftDeadline(nextNomination?.deadline ?? ''))
   }
   return <ValidatedForm onSubmit={() => { if (title.trim() && fandom.trim() && nominationId && !dateError) onSave({ title: title.trim(), category, fandom: fandom.trim(), nominationId, rating, description: description.trim(), notes: initial?.notes ?? '', targetWords: category === 'Текст' ? Number(targetWords) || 0 : 0, softStart, softEnd: actualEnd }) }}>
-    <label>Название работы<input autoFocus required placeholder="Как ты пока называешь эту идею?" value={title} onChange={(event) => setTitle(event.target.value)} /></label>
+    <div className="form-row project-title-row">
+      <label>Название работы<input autoFocus required placeholder="Как ты пока называешь эту идею?" value={title} onChange={(event) => setTitle(event.target.value)} /></label>
+      <label>Фандом<input required pattern=".*\S.*" placeholder="Название фандома/пейринга" value={fandom} onChange={(event) => setFandom(event.target.value)} /></label>
+    </div>
     <div className="form-row project-meta-row">
       <label>Тип работы<select value={category} onChange={(event) => setCategory(event.target.value as Category)}>{categories.map((item) => <option key={item}>{item}</option>)}</select></label>
       <label>Рейтинг<select value={rating} onChange={(event) => setRating(event.target.value)}><option value="">Пока не выбран</option><option>G</option><option>PG-13</option><option>R</option><option>NC-17</option><option>Другое</option></select></label>
       <label>Левел<select value={nominationId} onChange={(event) => changeLevel(event.target.value)}>{season.nominations.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
     </div>
-    <label>Фандом<input required pattern=".*\S.*" placeholder="Название фандома/пейринга" value={fandom} onChange={(event) => setFandom(event.target.value)} /></label>
-    {category === 'Текст' && <label>Цель по объёму слов<input type="number" min="0" step="100" value={targetWords} onChange={(event) => setTargetWords(event.target.value)} /></label>}
-    <div className="form-row"><label>План начать<input type="date" max={hardDeadline || undefined} value={softStart} onChange={(event) => setSoftStart(event.target.value)} /></label><label>Софт-дедлайн<input type="date" value={softEnd} min={softStart || undefined} max={hardDeadline || undefined} onChange={(event) => setSoftEnd(event.target.value)} placeholder={hardDeadline || 'Выбери дату'} /></label></div>
+    {category === 'Текст' ? <div className="form-row project-planning-row">
+      <label>План начать<input type="date" max={hardDeadline || undefined} value={softStart} onChange={(event) => setSoftStart(event.target.value)} /></label>
+      <label>Софт-дедлайн<input type="date" value={softEnd} min={softStart || undefined} max={hardDeadline || undefined} onChange={(event) => setSoftEnd(event.target.value)} placeholder={hardDeadline || 'Выбери дату'} /></label>
+      <label>Цель по объёму слов<input type="number" min="0" step="100" value={targetWords} onChange={(event) => setTargetWords(event.target.value)} /></label>
+    </div> : <div className="form-row">
+      <label>План начать<input type="date" max={hardDeadline || undefined} value={softStart} onChange={(event) => setSoftStart(event.target.value)} /></label>
+      <label>Софт-дедлайн<input type="date" value={softEnd} min={softStart || undefined} max={hardDeadline || undefined} onChange={(event) => setSoftEnd(event.target.value)} placeholder={hardDeadline || 'Выбери дату'} /></label>
+    </div>}
     <label>Краткое описание<textarea rows={3} value={description} onChange={(event) => setDescription(event.target.value)} placeholder="Пара слов об идее, сюжете или образе" /></label>
     {hardDeadline && <div className="deadline-hint">Хард-дедлайн левела: <b>{formatDate(hardDeadline)}</b></div>}{dateError && <div className="field-error">Плановое окно должно закончиться не раньше даты начала и не позже хард-дедлайна.</div>}
     <div className="workflow-preview"><small>ЭТАПЫ РАБОТЫ</small><div>{workflows[category].map((phase, index) => <span key={phase}>{index > 0 && <i>→</i>}{phase}</span>)}</div></div>
