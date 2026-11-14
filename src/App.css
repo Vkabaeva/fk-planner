@@ -200,6 +200,8 @@ form input::placeholder, form textarea::placeholder { color: #b1acb9; }
 form textarea { min-height: 76px; resize: vertical; line-height: 1.5; font-family: inherit; }
 form label small { color: #9b95a3; font-size: 9px; font-weight: 400; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.project-meta-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.25fr); }
+.project-meta-row > label, .project-meta-row select { min-width: 0; }
 .form-actions { display: flex; justify-content: flex-end; border-top: 1px solid #f0eef3; padding-top: 14px; margin-top: 3px; }
 .deadline-hint, .log-summary { background: #f7f5fa; border-radius: 7px; padding: 9px 10px; color: #918a9e; font-size: 9px; }
 .deadline-hint b, .log-summary b { color: #645a77; }
@@ -637,3 +639,5 @@ form input::placeholder, form textarea::placeholder, form label small { color: v
 @media (max-width: 540px) {
   .lane-heading { width: var(--nomination-column-width, 190px); flex: 0 0 var(--nomination-column-width, 190px); }
 }
+
+@media (max-width: 700px) { .project-meta-row { grid-template-columns: minmax(0, 1fr); } }
