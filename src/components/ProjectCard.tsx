@@ -50,7 +50,7 @@ export default function ProjectCard({ project, onAdvance, onLog, onMove, onEdit,
   }, [menuOpen])
 
   const phases = workflows[project.category]
-  const done = project.logs.reduce((sum, log) => sum + log.amount, 0)
+  const done = project.wordsWritten
   const remainingFrom = project.softStart > todayISO() ? project.softStart : todayISO()
   const daysLeft = project.softEnd ? Math.max(1, daysBetween(remainingFrom, project.softEnd) + 1) : 0
   const wordsPerDay = daysLeft ? Math.ceil(Math.max(0, project.targetWords - done) / daysLeft) : 0

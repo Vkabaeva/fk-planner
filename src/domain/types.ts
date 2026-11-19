@@ -18,6 +18,7 @@ export type Project = {
   attachments?: ProjectImageAttachment[]
   stageIndex: number
   targetWords: number
+  wordsWritten: number
   softStart: string
   softEnd: string
   logs: WorkLog[]

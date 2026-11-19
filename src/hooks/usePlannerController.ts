@@ -249,7 +249,7 @@ export function usePlannerController(args: Args) {
   }
 
   const logWords = (projectId: string, amount: number) => {
-    setStore((current) => ({ ...current, projects: current.projects.map((item) => item.id === projectId ? { ...item, logs: [...item.logs.filter((log) => log.date !== todayISO()), { date: todayISO(), amount: (item.logs.find((log) => log.date === todayISO())?.amount ?? 0) + amount }] } : item) }))
+    setStore((current) => ({ ...current, projects: current.projects.map((item) => item.id === projectId ? { ...item, wordsWritten: item.wordsWritten + amount, logs: [...item.logs.filter((log) => log.date !== todayISO()), { date: todayISO(), amount: (item.logs.find((log) => log.date === todayISO())?.amount ?? 0) + amount }] } : item) }))
     setModal(null)
     notify(`Добавлено ${amount.toLocaleString('ru-RU')} слов`)
   }

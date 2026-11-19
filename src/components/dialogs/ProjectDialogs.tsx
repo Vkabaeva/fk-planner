@@ -19,6 +19,7 @@ export function ProjectForm({ season, onSave, initial, initialNominationId }: { 
   const [nominationId, setNominationId] = useState(initialLevel?.id ?? '')
   const [rating, setRating] = useState(initial?.rating ?? initialDefaults.rating)
   const [targetWords, setTargetWords] = useState(String(initial?.targetWords ?? initialDefaults.targetWords))
+  const [wordsWritten, setWordsWritten] = useState(String(initial?.wordsWritten ?? 0))
   const [softStart, setSoftStart] = useState(initial?.softStart ?? '')
   const [softEnd, setSoftEnd] = useState(initial?.softEnd ?? defaultSoftDeadline(initialLevel?.deadline ?? ''))
   const nomination = season.nominations.find((item) => item.id === nominationId)
@@ -34,7 +35,7 @@ export function ProjectForm({ season, onSave, initial, initialNominationId }: { 
     setTargetWords(String(defaults.targetWords))
     setSoftEnd(defaultSoftDeadline(nextNomination?.deadline ?? ''))
   }
-  return <ValidatedForm onSubmit={() => { if (title.trim() && fandom.trim() && nominationId && !dateError) onSave({ title: title.trim(), category, fandom: fandom.trim(), nominationId, rating, description: description.trim(), notes: initial?.notes ?? '', targetWords: category === 'Текст' ? Number(targetWords) || 0 : 0, softStart, softEnd: actualEnd }) }}>
+  return <ValidatedForm onSubmit={() => { if (title.trim() && fandom.trim() && nominationId && !dateError) onSave({ title: title.trim(), category, fandom: fandom.trim(), nominationId, rating, description: description.trim(), notes: initial?.notes ?? '', targetWords: category === 'Текст' ? Number(targetWords) || 0 : 0, wordsWritten: category === 'Текст' ? Math.max(0, Math.floor(Number(wordsWritten) || 0)) : initial?.wordsWritten ?? 0, softStart, softEnd: actualEnd }) }}>
     <div className="form-row project-title-row">
       <label>Название работы<input autoFocus required placeholder="Как ты пока называешь эту идею?" value={title} onChange={(event) => setTitle(event.target.value)} /></label>
       <label>Фандом<input required pattern=".*\S.*" placeholder="Название фандома/пейринга" value={fandom} onChange={(event) => setFandom(event.target.value)} /></label>
@@ -52,6 +53,7 @@ export function ProjectForm({ season, onSave, initial, initialNominationId }: { 
       <label>План начать<input type="date" max={hardDeadline || undefined} value={softStart} onChange={(event) => setSoftStart(event.target.value)} /></label>
       <label>Софт-дедлайн<input type="date" value={softEnd} min={softStart || undefined} max={hardDeadline || undefined} onChange={(event) => setSoftEnd(event.target.value)} placeholder={hardDeadline || 'Выбери дату'} /></label>
     </div>}
+    {initial && category === 'Текст' && <label>Уже написано слов<input type="number" min="0" step="1" required value={wordsWritten} onChange={(event) => setWordsWritten(event.target.value)} /><small>Укажи 0, чтобы сбросить счётчик.</small></label>}
     <label>Краткое описание<textarea rows={3} value={description} onChange={(event) => setDescription(event.target.value)} placeholder="Пара слов об идее, сюжете или образе" /></label>
     {hardDeadline && <div className="deadline-hint">Хард-дедлайн левела: <b>{formatDate(hardDeadline)}</b></div>}{dateError && <div className="field-error">Плановое окно должно закончиться не раньше даты начала и не позже хард-дедлайна.</div>}
     <div className="workflow-preview"><small>ЭТАПЫ РАБОТЫ</small><div>{workflows[category].map((phase, index) => <span key={phase}>{index > 0 && <i>→</i>}{phase}</span>)}</div></div>
@@ -73,7 +75,7 @@ export function ProjectDetailsForm({ project, levelName, hardDeadline, onSave, a
   const [imageUrls, setImageUrls] = useState<Record<string, string>>({})
   const [previewImageId, setPreviewImageId] = useState('')
   const phases = workflows[project.category]
-  const wordsDone = project.logs.reduce((sum, log) => sum + log.amount, 0)
+  const wordsDone = project.wordsWritten
   useEffect(() => {
     let cancelled = false
     const urls: string[] = []
@@ -182,7 +184,7 @@ export function MoveProjectForm({ project, seasons, sourceSeason, onSave }: { pr
 
 export function LogForm({ project, onSave }: { project: Project; onSave: (amount: number) => void }) {
   const [amount, setAmount] = useState('')
-  const done = project.logs.reduce((sum, log) => sum + log.amount, 0)
+  const done = project.wordsWritten
   return <ValidatedForm onSubmit={() => { if (Number(amount) > 0) onSave(Number(amount)) }}><p className="log-project-name">{project.title}</p><label>Сколько слов написано сегодня?<input autoFocus required type="number" min="1" step="1" placeholder="Например, 350" value={amount} onChange={(event) => setAmount(event.target.value)} /></label><div className="log-summary">Уже есть <b>{done.toLocaleString('ru-RU')}</b> из <b>{project.targetWords.toLocaleString('ru-RU')}</b> слов</div><div className="form-actions"><button type="submit" className="button primary">Записать прогресс</button></div></ValidatedForm>
 }
 

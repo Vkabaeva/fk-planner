@@ -84,7 +84,7 @@ function App() {
   const season = store.seasons.find((item) => item.id === effectiveActiveSeasonId)
   const seasonProjects = useMemo(() => store.projects.filter((project) => season?.nominations.some((nomination) => nomination.id === project.nominationId)), [store.projects, season])
   const activeProjectCount = seasonProjects.filter((project) => project.stageIndex > 0 && project.stageIndex < workflows[project.category].length).length
-  const wordsDone = seasonProjects.reduce((sum, project) => sum + project.logs.reduce((count, log) => count + log.amount, 0), 0)
+  const wordsDone = seasonProjects.reduce((sum, project) => sum + project.wordsWritten, 0)
   const actions = usePlannerController({ store, setStore, season, seasonProjects, activeSeasonId: effectiveActiveSeasonId, setActiveSeasonId, setShowAllSeasons, setView, setModal, setSelectedProjectId, setSelectedNominationId, selectedNominationId, setEditingSeasonId, draggedProjectId, setDraggedProjectId, setDragOverNominationId, authUserId: authUser?.id, notify, setDeleteConfirmation })
   const { addSeason, deleteSeason, updateSeason, addNomination, updateNomination, deleteNomination, importTemplate, addProject, openNewProject, updateProject, openProjectEdit, openProjectDetails, saveProjectNotes, attachProjectImages, removeProjectImage, dragProjectOverLane, dropProjectOnLane, openProjectMove, moveProject, advanceProject, logWords, removeProject, changeProjectWindow } = actions
 

@@ -56,6 +56,10 @@ function decodeProject(value: unknown): Project {
   const targetWords = typeof value.targetWords === 'number' && Number.isFinite(value.targetWords) ? value.targetWords : 0
   if (value.logs !== undefined && !Array.isArray(value.logs)) throw new Error('Некорректный список прогресса')
   if (value.attachments !== undefined && !Array.isArray(value.attachments)) throw new Error('Некорректный список вложений')
+  const logs = (value.logs as unknown[] | undefined)?.map(decodeLog) ?? []
+  const wordsWritten = typeof value.wordsWritten === 'number' && Number.isFinite(value.wordsWritten) && value.wordsWritten >= 0
+    ? Math.floor(value.wordsWritten)
+    : Math.max(0, Math.floor(logs.reduce((sum, log) => sum + log.amount, 0)))
   return {
     id: requiredString(value.id, 'project.id'),
     title: requiredString(value.title, 'project.title'),
@@ -68,9 +72,10 @@ function decodeProject(value: unknown): Project {
     attachments: (value.attachments as unknown[] | undefined)?.map(decodeAttachment),
     stageIndex,
     targetWords,
+    wordsWritten,
     softStart: typeof value.softStart === 'string' ? value.softStart : '',
     softEnd: typeof value.softEnd === 'string' ? value.softEnd : '',
-    logs: (value.logs as unknown[] | undefined)?.map(decodeLog) ?? [],
+    logs,
   }
 }
 
